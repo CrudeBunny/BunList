@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shopping List</title>
+  </head>
+  <body>
+    <h1>Shopping List</h1>
+
+    <!-- Input form for adding items -->
+    <form>
+      <label for="item">Item:</label>
+      <input type="text" id="item" name="item" required><br>
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" required><br>
+
+      <label for="temperature">Temperature:</label>
+      <select id="temperature" name="temperature" required>
+        <option value="">--Select--</option>
+        <option value="hot">Hot</option>
+        <option value="cold">Cold</option>
+      </select><br>
+
+      <button type="button" onclick="addItem()">Add Item</button>
+    </form>
+
+    <!-- Display the shopping list -->
+    <h2>Cold Items</h2>
+    <ul id="cold-items"></ul>
+
+    <h2>Hot Items</h2>
+    <ul id="hot-items"></ul>
+
+    <script>
+      function addItem() {
+        // Get the user input values
+        var item = document.getElementById("item").value;
+        var quantity = document.getElementById("quantity").value;
+        var temperature = document.getElementById("temperature").value;
+
+        // Create a new list item
+        var listItem = document.createElement("li");
+        var itemText = document.createTextNode(item + " x" + quantity);
+        listItem.appendChild(itemText);
+
+        // Add the list item to the appropriate list based on temperature
+        if (temperature === "hot") {
+          document.getElementById("hot-items").appendChild(listItem);
+        } else if (temperature === "cold") {
+          document.getElementById("cold-items").appendChild(listItem);
+        }
+
+        // Clear the input fields
+        document.getElementById("item").value = "";
+        document.getElementById("quantity").value = "";
+        document.getElementById("temperature").value = "";
+      }
+
+      function removeItem(item) {
+        // Remove the list item
+        item.parentNode.removeChild(item);
+      }
+    </script>
+  </body>
+</html>
